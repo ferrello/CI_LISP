@@ -2,11 +2,11 @@
 Implement a compiler using flex (lex) and bison (yacc). The implementation will span several stages; each stage will add a feature to the interpreter. The later stages are much more challenging than the initial stages.
 
 ## Author
-> * Ferid Ruano
+> Ferid Ruano
 
-> * CSU Channel Islands
+> CSU Channel Islands
 
-> * COMP 232 - Programming Languages
+> COMP 232 - Programming Languages
 
 
 ## Tasks
