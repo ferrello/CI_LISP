@@ -14,6 +14,8 @@ Implement a compiler using flex (lex) and bison (yacc). The implementation will 
 
 We will be constructing and evaluating abstract syntax trees representing the Cambridge Polish Notation input.
 
+:exclamation: Results of DOUBLE_TYPE that are whole numbers will be converted to INT_TYPE to remove trailing zeros (i.e 10.0 = 10).
+
 `> (add 1 2)`
 `> (mult 2.5 3)`
 `> (pow 16 3.5)`
