@@ -10,7 +10,7 @@ Implement a compiler using flex (lex) and bison (yacc). The implementation will 
 
 
 ## Tasks
-#### Task 1 - 10/30/19
+### Task 1 - 10/30/19
 
 We will be constructing and evaluating abstract syntax trees representing the Cambridge Polish Notation input.
 
