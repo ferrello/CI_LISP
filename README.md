@@ -10,7 +10,7 @@ Implement a compiler using flex (lex) and bison (yacc). The implementation will 
 
 
 ## Tasks
-####Task 1 - 10/30/19
+#### Task 1 - 10/30/19
 
 We will be constructing and evaluating abstract syntax trees representing the Cambridge Polish Notation input.
 
@@ -23,7 +23,7 @@ We will be constructing and evaluating abstract syntax trees representing the Ca
 
 
 
-####Task 2 - 11/9/19
+#### Task 2 - 11/9/19
 
 Extends the Bison (yacc) grammar to accommodate variables that in Lisp jargon are called symbols. Variables exist in potentially nested scopes that can be defined by the let section construct preceding CILisp s-expressions. Each symbol assumes a value represented by the associated s-expression. A symbol can be any number of small and capital letters.
 
