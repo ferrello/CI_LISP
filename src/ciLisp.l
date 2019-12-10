@@ -1,6 +1,6 @@
 /* Name: Ferid Ruano
- * Lab: ciLisp
- * Date: 10/30/19
+ * Lab: CILisp - Task 7
+ * Date: 12/2/19
  * Course: COMP 232 - Programming Languages
  */
 
@@ -20,7 +20,8 @@
 digit [0-9]
 int [+-]?{digit}+
 double [+-]?{digit}+[.]{digit}*
-func "neg"|"abs"|"exp"|"sqrt"|"add"|"sub"|"mult"|"div"|"remainder"|"log"|"pow"|"max"|"min"|"exp2"|"cbrt"|"hypot"
+symbol [a-zA-z]+
+func "neg"|"abs"|"add"|"sub"|"mult"|"remainder"|"pow"|"max"|"min"|"sqrt"|"exp"|"exp2"|"log"|"cbrt"|"div"|"hypot"|"print"|"rand"|"read"|"equal"|"less"|"greater"
 
 
 /***************/
@@ -28,25 +29,6 @@ func "neg"|"abs"|"exp"|"sqrt"|"add"|"sub"|"mult"|"div"|"remainder"|"log"|"pow"|"
 /***************/
 
 %%
-
-{int} {
-    yylval.dval = strtod(yytext, NULL);
-    fprintf(stderr, "lex: INT dval = %lf\n", yylval.dval);
-    return INT;
-    }
-
-{double} {
-    yylval.dval = strtod(yytext, NULL);
-    fprintf(stderr, "lex: DOUBLE dval = %lf\n", yylval.dval);
-    return DOUBLE;
-    }
-
-{func} {
-    yylval.sval = malloc(sizeof(char) * strlen(yytext) + 1);
-    strcpy(yylval.sval, yytext);
-    fprintf(stderr, "lex: FUNC sval = %s\n", yylval.sval);
-    return FUNC;
-    }
 
 "(" {
     fprintf(stderr, "lex: LPAREN\n");
@@ -58,9 +40,60 @@ func "neg"|"abs"|"exp"|"sqrt"|"add"|"sub"|"mult"|"div"|"remainder"|"log"|"pow"|"
     return RPAREN;
     }
 
+"let" {
+    fprintf(stderr, "lex: LET\n");
+    return LET;
+    }
+
+
+"int" {
+    fprintf(stderr, "lex: INT\n");
+    return INT;
+    }
+
+"double" {
+    fprintf(stderr, "lex: DOUBLE\n");
+    return DOUBLE;
+    }
+
+"lambda" {
+    fprintf(stderr, "lex: LAMBDA\n");
+    return LAMBDA;
+    }
+
+"cond" {
+    fprintf(stderr, "lex: COND\n");
+    return COND;
+    }
 
 "quit" {
     return QUIT;
+    }
+
+{int} {
+    yylval.dval = strtod(yytext, NULL);
+    fprintf(stderr, "lex: INT dval = %lf\n", yylval.dval);
+    return INT_LITERAL;
+    }
+
+{double} {
+    yylval.dval = strtod(yytext, NULL);
+    fprintf(stderr, "lex: DOUBLE dval = %lf\n", yylval.dval);
+    return DOUBLE_LITERAL;
+    }
+
+{func} {
+    yylval.sval = malloc(sizeof(char) * yyleng + 1);
+    strcpy(yylval.sval, yytext);
+    fprintf(stderr, "lex: FUNC sval = %s\n", yylval.sval);
+    return FUNC;
+    }
+
+{symbol} {
+    yylval.sval = malloc(sizeof(char) + yyleng + 1);
+    strcpy(yylval.sval, yytext);
+    fprintf(stderr, "lex: SYMBOL sval = %s\n", yylval.sval);
+    return SYMBOL;
     }
 
 [\n] {
@@ -84,7 +117,7 @@ func "neg"|"abs"|"exp"|"sqrt"|"add"|"sub"|"mult"|"div"|"remainder"|"log"|"pow"|"
 
 int main(void) {
 
-    //   freopen("/dev/null", "w", stderr); // except for this line that can be uncommented to throw away debug printouts
+    freopen("/dev/null", "w", stderr); // except for this line that can be uncommented to throw away debug printouts
 
     char *s_expr_str = NULL;
     size_t s_expr_str_len = 0;
